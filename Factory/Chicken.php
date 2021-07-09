@@ -3,21 +3,20 @@
 
 namespace FarmSimulator\Factory;
 
-class CowAnimal extends Animal
+class Chicken extends Animal
 {
     public function __construct()
     {
         $this->idAnimal = parent::$id++;
     }
 
-    //Корова дает молоко
-    public function getProduct()
+    public function makeProduct(): Product
     {
-        return rand(8, 12);
+        return new Egg();
     }
 
     public function getNameAnimal()
     {
-        return "Cow";
+        return 'Chicken';
     }
 }
