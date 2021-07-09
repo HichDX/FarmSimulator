@@ -9,14 +9,17 @@ class Farm
     function factory($countCow, $countChicken)
     {
         static $countC, $countCh; // Переменные, в которых хранятся общее количество коров и кур.
-        $barn = array(); // Хлев
+        $barn = array(
+            array(),
+            array()
+        );
         $countC += $countCow;
         $countCh += $countChicken;
         for ($i = 0; $i < $countCow; $i++) {
-            $barn[] = new Cow();
+            $barn[0][] = new Cow();
         }
         for ($i = 0; $i < $countChicken; $i++) {
-            $barn[] = new Chicken();
+            $barn[1][] = new Chicken();
         }
         echo
         "-----------------------------------------------------
@@ -32,15 +35,11 @@ class Farm
         $milk = 0;
         $egg = 0;
         for ($i = 0; $i < 7; $i++) {
-            foreach ($barn as $barns) {
-                switch ($barns->getNameAnimal()) {
-                    case "Cow":
-                        $milk += $barns->takeProduct();
-                        break;
-                    case "Chicken":
-                        $egg += $barns->takeProduct();
-                        break;
-                }
+            for ($j = 0; $j<$countC; $j++) {
+                $milk += $barn[0][$j]->takeProduct();
+            }
+            for ($j = 0; $j<$countCh; $j++) {
+                $egg += $barn[1][$j]->takeProduct();
             }
         }
         echo "Количество молока: " . $milk . "\n";
