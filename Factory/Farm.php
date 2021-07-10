@@ -32,31 +32,12 @@ class Farm
         "-----------------------------------------------------
                     Сбор продукции 
 -----------------------------------------------------\n";
+        $productions = new Productions();
         for ($i = 0; $i < 7; $i++) {
-            $this->milk += $this->getMilk($barn);
-            $this->egg += $this->getEgg($barn);
+            $this->milk += $productions->getMilk($barn);
+            $this->egg += $productions->getEgg($barn);
         }
         echo "Количество молока: " . $this->milk . "\n";
         echo "Количество яиц: " . $this->egg . "\n";
-    }
-
-    public function getMilk($barn)
-    {
-        $milk = 0;
-        for ($i = 0; $i < count($barn); $i++) {
-            if ($barn[$i]->getNameAnimal() === 'Cow')
-                $milk += $barn[$i]->takeProduct();
-        }
-        return $milk;
-    }
-
-    public function getEgg($barn)
-    {
-        $egg = 0;
-        for ($i = 0; $i < count($barn); $i++) {
-            if ($barn[$i]->getNameAnimal() === 'Chicken')
-                $egg += $barn[$i]->takeProduct();
-        }
-        return $egg;
     }
 }
