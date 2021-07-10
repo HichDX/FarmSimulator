@@ -15,7 +15,7 @@ class Cow extends Animal
         return new Milk();
     }
 
-    public function getNameAnimal()
+    public function getNameAnimal(): string
     {
         return "Cow";
     }

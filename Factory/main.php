@@ -8,4 +8,4 @@ $countCow = 10; // Начальное количество коров
 $countChicken = 20; // Начальное количество кур
 $farm = new Farm();
 $farm->factory($countCow, $countChicken);
-
+$farm->factory(5, 1);

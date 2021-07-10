@@ -6,20 +6,20 @@ namespace FarmSimulator\Factory;
 
 class Farm
 {
-    function factory($countCow, $countChicken)
+    private $milk;
+    private $egg;
+
+    public function factory($countCow, $countChicken)
     {
         static $countC, $countCh; // Переменные, в которых хранятся общее количество коров и кур.
-        $barn = array(
-            array(),
-            array()
-        );
+        $barn = array(); // хлев
         $countC += $countCow;
         $countCh += $countChicken;
         for ($i = 0; $i < $countCow; $i++) {
-            $barn[0][] = new Cow();
+            $barn[] = new Cow();
         }
         for ($i = 0; $i < $countChicken; $i++) {
-            $barn[1][] = new Chicken();
+            $barn[] = new Chicken();
         }
         echo
         "-----------------------------------------------------
@@ -32,17 +32,31 @@ class Farm
         "-----------------------------------------------------
                     Сбор продукции 
 -----------------------------------------------------\n";
-        $milk = 0;
-        $egg = 0;
         for ($i = 0; $i < 7; $i++) {
-            for ($j = 0; $j<$countC; $j++) {
-                $milk += $barn[0][$j]->takeProduct();
-            }
-            for ($j = 0; $j<$countCh; $j++) {
-                $egg += $barn[1][$j]->takeProduct();
-            }
+            $this->milk += $this->getMilk($barn);
+            $this->egg += $this->getEgg($barn);
         }
-        echo "Количество молока: " . $milk . "\n";
-        echo "Количество яиц: " . $egg . "\n";
+        echo "Количество молока: " . $this->milk . "\n";
+        echo "Количество яиц: " . $this->egg . "\n";
+    }
+
+    public function getMilk($barn)
+    {
+        $milk = 0;
+        for ($i = 0; $i < count($barn); $i++) {
+            if ($barn[$i]->getNameAnimal() === 'Cow')
+                $milk += $barn[$i]->takeProduct();
+        }
+        return $milk;
+    }
+
+    public function getEgg($barn)
+    {
+        $egg = 0;
+        for ($i = 0; $i < count($barn); $i++) {
+            if ($barn[$i]->getNameAnimal() === 'Chicken')
+                $egg += $barn[$i]->takeProduct();
+        }
+        return $egg;
     }
 }

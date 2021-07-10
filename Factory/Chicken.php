@@ -15,8 +15,8 @@ class Chicken extends Animal
         return new Egg();
     }
 
-    public function getNameAnimal()
+    public function getNameAnimal(): string
     {
-        return 'Chicken';
+        return "Chicken";
     }
 }
